@@ -4,7 +4,7 @@
 	import { Spinner } from 'flowbite-svelte';
 
 	const today = new Date();
-	const incNum = 3;
+	const incNum = 5;
 
 	let count = incNum;
 	let loading: boolean;

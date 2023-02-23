@@ -25,7 +25,6 @@
 		</div>
 		<p class="text-lg font-bold m-0">{event.summary}</p>
 		<p class="italic font-light">{event.organizer.name}</p>
-		<p />
 	</Card>
 </button>
 
