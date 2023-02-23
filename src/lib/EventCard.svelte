@@ -2,6 +2,8 @@
 	import { Card } from 'flowbite-svelte';
 	import EventPopup from './EventPopup.svelte';
 	import type { Event } from './types';
+	import Heart from './heartOutline.svelte';
+	import FilledHeart from './heartFilled.svelte';
 
 	export let event: Event;
 	const start = new Date(event.date.start);
@@ -15,13 +17,20 @@
 	};
 
 	let modalVisible = false;
+	let heartFilled = true;
 </script>
 
 <button on:click={() => (modalVisible = !modalVisible)}>
 	<Card class="hover:scale-105 transition-transform text-left h-full" img={event.image_url}>
 		<div class="flex justify-between m-0">
 			<p class="font-light">{getTime(start)} - {getTime(end)}</p>
-			<p>hjärta</p>
+			<button on:click|stopPropagation={() => heartFilled = !heartFilled} >
+				{#if heartFilled}
+					<Heart />
+				{:else}
+					<FilledHeart />
+				{/if}
+			</button>
 		</div>
 		<p class="text-lg font-bold m-0">{event.summary}</p>
 		<p class="italic font-light">{event.organizer.name}</p>

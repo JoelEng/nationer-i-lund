@@ -1,6 +1,5 @@
 <script lang="ts">
-	import { Modal } from 'flowbite-svelte';
-	import { Button, ButtonGroup } from 'flowbite-svelte';
+	import { Modal, Button, ButtonGroup, A } from 'flowbite-svelte';
 	import Heart from './heartOutline.svelte';
 	import FilledHeart from './heartFilled.svelte';
 	import type { Event } from './types';
@@ -21,9 +20,6 @@
 	end = (new Date(end)).toISOString().substring(11,16);
 	const location = event.location;
 	let b = true;
-	function likeEvent() {
-		b = !b;
-	}
 </script>
 
 <Modal
@@ -32,23 +28,24 @@
 	on:hide={() => (visible = toggle())}
 >
 	<svelte:fragment slot="default">
-		BALLABALLABALAL
 		<p class="text-base leading-relaxed text-gray-500 dark:text-gray-400">
 			{description}
 		</p>
 
 		  <p>
-			start: {start}, end: {end}
+			{start} - {end}
 		  </p>
 		  <p>
-			location: {location}
+			<!--  https://www.google.com/maps/search/?api=1&parameters 
+			Replace parameeters with "query={location}" and it will ridirect to google maps -->
+			<A target="_blank" class="font-medium hover:underline" href={`https://www.google.com/maps/search/?api=1&query=${location}`} >{location}</A>
 		  </p>
 	  </svelte:fragment>
 	  <svelte:fragment slot='footer'>
 		<ButtonGroup class="space-x-px">
 			<Button gradient color="purpleToBlue">Book</Button>
 			<Button gradient color="greenToBlue"><a href={`mailto:${email}`}> email </a></Button>
-			<Button class="align-end" on:click={likeEvent} gradient color="cyanToBlue">
+			<Button class="align-end" on:click={() => b = !b} gradient color="cyanToBlue">
 				{#if b}
 					<Heart />
 				{:else}
