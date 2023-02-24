@@ -1,6 +1,6 @@
 <script>
 	import { DarkMode } from 'flowbite-svelte';
-</script>
+  </script>
 
 <div class="flex justify-between">
 	<DarkMode class="dark:text-white" />
