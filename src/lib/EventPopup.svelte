@@ -1,7 +1,6 @@
 <script lang="ts">
 	import { Modal, Button, ButtonGroup, A } from 'flowbite-svelte';
-	import Heart from './heartOutline.svelte';
-	import FilledHeart from './heartFilled.svelte';
+	import Heart from './Heart.svelte';
 	import type { Event } from './types';
 
 	let defaultModal = false;
@@ -19,7 +18,6 @@
 	start = new Date(start).toISOString().substring(11, 16);
 	end = new Date(end).toISOString().substring(11, 16);
 	const location = event.location;
-	let b = true;
 </script>
 
 <Modal title={`${name}: ${summary}`} bind:open={visible} on:hide={() => (visible = toggle())}>
@@ -41,24 +39,11 @@
 			>
 		</p>
 	</svelte:fragment>
-	<svelte:fragment slot="footer">
+	<div slot="footer" class="flex w-full justify-between">
 		<ButtonGroup class="space-x-px">
 			<Button gradient color="purpleToBlue">Book</Button>
 			<Button gradient color="greenToBlue"><a href={`mailto:${email}`}> email </a></Button>
-			<Button class="align-end" on:click={() => (b = !b)} gradient color="cyanToBlue">
-				{#if b}
-					<Heart />
-				{:else}
-					<FilledHeart />
-				{/if}
-			</Button>
 		</ButtonGroup>
-		<!-- <button on:click={likeEvent}>
-			{#if b}
-				<Heart />
-			{:else}
-				<FilledHeart />
-			{/if}
-		</button> -->
-	</svelte:fragment>
+		<Heart size={10} eventId={event.id} />
+	</div>
 </Modal>

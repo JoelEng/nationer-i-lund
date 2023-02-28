@@ -1,9 +1,8 @@
 <script>
 	import '../app.postcss';
 	import Navbar from '$lib/Navbar.svelte';
-  </script>
+</script>
 
-
-<Navbar /> 
+<Navbar />
 
 <slot />
