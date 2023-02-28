@@ -14,7 +14,8 @@
 	<NavHamburger on:click={toggle} />
 	<Dropdown />
 	<NavUl {hidden}>
-		<NavLi href="/" active={true}>Home</NavLi>
+		<NavLi href="/">Home</NavLi>
+		<NavLi href="/saved">Saved</NavLi>
 	</NavUl>
 	<div class="flex justify-between">
 		<DarkMode class="dark:text-white" />

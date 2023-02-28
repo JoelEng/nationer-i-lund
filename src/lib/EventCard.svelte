@@ -25,7 +25,7 @@
 	>
 		<div class="flex justify-between m-0">
 			<p class="font-light">{getTime(start)} - {getTime(end)}</p>
-			<Heart eventId={event.id} />
+			<Heart {event} />
 		</div>
 		<p class="text-lg font-bold m-0">{event.summary}</p>
 		<p class="italic font-light">{event.organizer.name}</p>

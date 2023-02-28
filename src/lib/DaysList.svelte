@@ -1,5 +1,5 @@
 <script lang="ts">
-	import EventList from '$lib/EventList.svelte';
+	import EventDayList from '$lib/EventDayList.svelte';
 	import { inview } from 'svelte-inview';
 	import { Spinner } from 'flowbite-svelte';
 
@@ -17,7 +17,7 @@
 </script>
 
 {#each [...Array(count).keys()] as i}
-	<EventList date={new Date(new Date().setDate(today.getDate() + i))} bind:loading />
+	<EventDayList date={new Date(new Date().setDate(today.getDate() + i))} bind:loading />
 {/each}
 {#if loading}
 	<div class="my-10 flex justify-center">

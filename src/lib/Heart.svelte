@@ -1,19 +1,21 @@
 <script lang="ts">
 	import { liked } from './stores';
+	import type { Event as NationEvent } from './types';
 
 	export let size = 8;
-	export let eventId: string;
+	export let event: NationEvent;
 
-	let filled = false;
+	$: filled = Array.from($liked).some((e) => e.id == event.id);
 
 	const handleClick = (e: Event) => {
 		e.stopPropagation();
 		filled = !filled;
 
-		if (filled) {
-			$liked = new Set([...$liked, eventId]);
+		// Add to and remove from the set of liked events
+		if (filled && !Array.from($liked).some((e) => e.id == event.id)) {
+			$liked = new Set([...$liked, event]);
 		} else {
-			$liked = new Set([...$liked].filter((e) => e != eventId));
+			$liked = new Set([...$liked].filter((e) => e.id != event.id));
 		}
 
 		console.log($liked);

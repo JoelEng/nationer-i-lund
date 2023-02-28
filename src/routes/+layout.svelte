@@ -5,4 +5,8 @@
 
 <Navbar />
 
-<slot />
+<div class="flex justify-center">
+	<div class="max-w-screen-lg relative">
+		<slot />
+	</div>
+</div>

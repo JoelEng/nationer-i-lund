@@ -44,6 +44,6 @@
 			<Button gradient color="purpleToBlue">Book</Button>
 			<Button gradient color="greenToBlue"><a href={`mailto:${email}`}> email </a></Button>
 		</ButtonGroup>
-		<Heart size={10} eventId={event.id} />
+		<Heart size={10} {event} />
 	</div>
 </Modal>
