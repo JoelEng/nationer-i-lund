@@ -14,38 +14,38 @@
 	const summary = event['summary'];
 
 	const organizer = event['organizer'];
-	const {name, email} = event.organizer;
-	let {start, end, last_updated} = event.date;
-	start = (new Date(start)).toISOString().substring(11,16);
-	end = (new Date(end)).toISOString().substring(11,16);
+	const { name, email } = event.organizer;
+	let { start, end, last_updated } = event.date;
+	start = new Date(start).toISOString().substring(11, 16);
+	end = new Date(end).toISOString().substring(11, 16);
 	const location = event.location;
 	let b = true;
 </script>
 
-<Modal
-	title={`${name}: ${summary}`}
-	bind:open={visible}
-	on:hide={() => (visible = toggle())}
->
+<Modal title={`${name}: ${summary}`} bind:open={visible} on:hide={() => (visible = toggle())}>
 	<svelte:fragment slot="default">
 		<p class="text-base leading-relaxed text-gray-500 dark:text-gray-400">
 			{description}
 		</p>
 
-		  <p>
+		<p>
 			{start} - {end}
-		  </p>
-		  <p>
+		</p>
+		<p>
 			<!--  https://www.google.com/maps/search/?api=1&parameters 
 			Replace parameeters with "query={location}" and it will ridirect to google maps -->
-			<A target="_blank" class="font-medium hover:underline" href={`https://www.google.com/maps/search/?api=1&query=${location}`} >{location}</A>
-		  </p>
-	  </svelte:fragment>
-	  <svelte:fragment slot='footer'>
+			<A
+				target="_blank"
+				class="font-medium hover:underline"
+				href={`https://www.google.com/maps/search/?api=1&query=${location}`}>{location}</A
+			>
+		</p>
+	</svelte:fragment>
+	<svelte:fragment slot="footer">
 		<ButtonGroup class="space-x-px">
 			<Button gradient color="purpleToBlue">Book</Button>
 			<Button gradient color="greenToBlue"><a href={`mailto:${email}`}> email </a></Button>
-			<Button class="align-end" on:click={() => b = !b} gradient color="cyanToBlue">
+			<Button class="align-end" on:click={() => (b = !b)} gradient color="cyanToBlue">
 				{#if b}
 					<Heart />
 				{:else}

@@ -21,10 +21,13 @@
 </script>
 
 <button on:click={() => (modalVisible = !modalVisible)}>
-	<Card class="hover:scale-105 transition-transform text-left h-full" img={event.image_url}>
+	<Card
+		class="hover:scale-105 transition-transform text-left h-full border-0"
+		img={event.image_url}
+	>
 		<div class="flex justify-between m-0">
 			<p class="font-light">{getTime(start)} - {getTime(end)}</p>
-			<button on:click|stopPropagation={() => heartFilled = !heartFilled }>
+			<button on:click|stopPropagation={() => (heartFilled = !heartFilled)}>
 				{#if heartFilled}
 					<Heart />
 				{:else}
