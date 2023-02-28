@@ -41,8 +41,8 @@
 	</svelte:fragment>
 	<div slot="footer" class="flex w-full justify-between">
 		<ButtonGroup class="space-x-px">
-			<Button gradient color="purpleToBlue">Book</Button>
-			<Button gradient color="greenToBlue"><a href={`mailto:${email}`}> email </a></Button>
+			<Button color="blue">Boka</Button>
+			<Button color="light" href="mailto:{email}">Kontakta oss</Button>
 		</ButtonGroup>
 		<Heart size={10} {event} />
 	</div>

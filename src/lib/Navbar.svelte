@@ -1,6 +1,7 @@
 <script>
-	import { Navbar, NavBrand, NavLi, NavUl, NavHamburger, DarkMode } from 'flowbite-svelte';
+	import { Navbar, NavBrand, NavLi, NavUl, NavHamburger, DarkMode, Button } from 'flowbite-svelte';
 	import Dropdown from './Dropdown.svelte';
+	import HeartIcon from './HeartIcon.svelte';
 
 	const height = 20;
 </script>
@@ -12,12 +13,15 @@
 >
 	<NavBrand href="/" />
 	<NavHamburger on:click={toggle} />
-	<Dropdown />
-	<NavUl {hidden}>
-		<NavLi href="/">Home</NavLi>
-		<NavLi href="/saved">Saved</NavLi>
-	</NavUl>
-	<div class="flex justify-between">
+	<div>
+		<Dropdown />
+	</div>
+	<div class="flex justify-between gap-2">
+		<Button color="light" href="/">Alla event</Button>
+		<Button color="light" href="/saved" class="flex align-center gap-2">
+			<HeartIcon size={6} />
+			Sparade
+		</Button>
 		<DarkMode class="dark:text-white" />
 	</div>
 </Navbar>

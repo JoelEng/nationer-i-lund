@@ -4,7 +4,7 @@
 	//export let event: Event;
 </script>
 
-<Button><Chevron>Nationer</Chevron></Button>
+<Button color="light"><Chevron>Nationer</Chevron></Button>
 <Dropdown class="w-44 p-3 space-y-3 text-sm">
 	<li>
 		<Checkbox>Lunds Nation</Checkbox>
@@ -41,7 +41,7 @@
 	</li>
 </Dropdown>
 
-<Button><Chevron>Tid</Chevron></Button>
+<Button color="light"><Chevron>Tid</Chevron></Button>
 <Dropdown class="w-44 p-3 space-y-3 text-sm">
 	<li>
 		<Checkbox>Lunch</Checkbox>
