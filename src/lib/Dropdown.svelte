@@ -12,13 +12,20 @@
 			$selectedOrganizers = new Set([...$selectedOrganizers].filter((x) => x !== (e.target as HTMLInputElement).value))
 		}
 	}
+
+	function isInList (org:string) {
+		if($selectedOrganizers.has(org)){
+			return true;
+		}
+		else return false;
+	}
 </script>
 
 <Button color="light"><Chevron>Nationer</Chevron></Button>
 <Dropdown class="w-44 p-3 space-y-3 text-sm">
 	{#each orgs as org}
 		<li>
-			<Checkbox value={org} on:change={handletoggle}>{org}</Checkbox>
+			<Checkbox value={org} checked={isInList(org)} on:change={handletoggle}>{org}</Checkbox>
 		</li>
 	{/each}
 </Dropdown>
