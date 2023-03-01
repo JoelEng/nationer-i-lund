@@ -1,9 +1,20 @@
 <script>
+	import { goto } from '$app/navigation';
+	import { page } from '$app/stores';
 	import { Navbar, NavBrand, NavLi, NavUl, NavHamburger, DarkMode, Button } from 'flowbite-svelte';
 	import Dropdown from './Dropdown.svelte';
 	import HeartIcon from './HeartIcon.svelte';
 
 	const height = 20;
+	$: showSaved = $page.route.id == '/saved';
+
+	const toggleSaved = () => {
+		if (showSaved) {
+			goto('/');
+		} else {
+			goto('/saved');
+		}
+	};
 </script>
 
 <Navbar
@@ -17,9 +28,12 @@
 		<Dropdown />
 	</div>
 	<div class="flex justify-between gap-2">
-		<Button color="light" href="/">Alla event</Button>
-		<Button color="light" href="/saved" class="flex align-center gap-2">
-			<HeartIcon size={6} />
+		<Button
+			color={showSaved ? 'dark' : 'light'}
+			on:click={toggleSaved}
+			class="flex align-center gap-2 {showSaved && 'dark:bg-white dark:text-black'}"
+		>
+			<HeartIcon size={6} filled={showSaved} />
 			Sparade
 		</Button>
 		<DarkMode class="dark:text-white" />
