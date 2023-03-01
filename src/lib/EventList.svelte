@@ -4,10 +4,11 @@
 	import { selectedOrganizers } from './stores';
 
 	export let list: Event[];
-	let filteredList = list.filter(
-		(e) => new Date(e.date.end).getTime() - new Date(e.date.start).getTime() > 0
-	);
+	let filteredList = list;
 	$: {
+		filteredList = list.filter(
+			(e) => new Date(e.date.end).getTime() - new Date(e.date.start).getTime() > 0
+		);
 		if ($selectedOrganizers.size > 0) {
 			filteredList = list.filter((event) => $selectedOrganizers.has(event.organizer.name));
 		}
