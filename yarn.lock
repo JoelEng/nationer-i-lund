@@ -561,6 +561,11 @@ cssesc@^3.0.0:
   resolved "https://registry.npmjs.org/cssesc/-/cssesc-3.0.0.tgz"
   integrity sha512-/Tb/JcjK111nNScGob5MNtsntNM1aCNUDipB/TkwZFhyDrrE47SOx/18wF2bbjgc3ZzCSKW1T5nt5EbFoAz/Vg==
 
+date-picker-svelte@^2.2.5:
+  version "2.2.5"
+  resolved "https://registry.yarnpkg.com/date-picker-svelte/-/date-picker-svelte-2.2.5.tgz#83bb6c6c474938e25662cd0b0d2f2857a8089be5"
+  integrity sha512-cexGp5ugTLQqxpjoBsn3JQOGVsBwRpeHj76dwtEPCIyc4w0m5H/Zv6GkqRJd8aJSlo2uK21Dx4QnnCh7rLVh4g==
+
 debug@^4.1.1, debug@^4.3.2, debug@^4.3.4:
   version "4.3.4"
   resolved "https://registry.npmjs.org/debug/-/debug-4.3.4.tgz"
@@ -1591,6 +1596,11 @@ supports-preserve-symlinks-flag@^1.0.0:
   version "1.0.0"
   resolved "https://registry.npmjs.org/supports-preserve-symlinks-flag/-/supports-preserve-symlinks-flag-1.0.0.tgz"
   integrity sha512-ot0WnXS9fgdkgIcePe6RHNk1WA8+muPa6cSjeR3V8K27q9BB1rTE3R1p7Hv0z1ZyAc8s6Vvv8DIyWf681MAt0w==
+
+svelte-bricks@^0.1.7:
+  version "0.1.7"
+  resolved "https://registry.yarnpkg.com/svelte-bricks/-/svelte-bricks-0.1.7.tgz#683f8ba98ca4bc8868033666538dc35be20e155c"
+  integrity sha512-2wJseuhlVYVRoCKJGQuwCySTMsvBVS4dchah6Ecz9RNng0zufx6NxToXc7iGf0QOHjo9wwAsOczRI+Ou2q4gEg==
 
 svelte-check@^3.0.1:
   version "3.0.3"

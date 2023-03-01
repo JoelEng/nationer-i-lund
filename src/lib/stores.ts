@@ -10,10 +10,9 @@ if (browser) {
 
 export const liked: Writable<Set<Event>> = writable(new Set(storedLikes));
 
-
 if (browser) {
 	liked.subscribe((set) => (localStorage.liked = JSON.stringify([...set])));
 }
 
-
 export const selectedOrganizers: Writable<Set<string>> = writable(new Set());
+export const indexDay: Writable<Date> = writable(new Date());

@@ -18,8 +18,6 @@
 		} else {
 			$liked = new Set([...$liked].filter((e) => e.id != event.id));
 		}
-
-		console.log($liked);
 	};
 </script>
 

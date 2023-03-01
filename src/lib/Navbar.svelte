@@ -1,9 +1,11 @@
-<script>
+<script lang="ts">
 	import { goto } from '$app/navigation';
 	import { page } from '$app/stores';
 	import { Navbar, NavBrand, NavLi, NavUl, NavHamburger, DarkMode, Button } from 'flowbite-svelte';
 	import Dropdown from './Dropdown.svelte';
 	import HeartIcon from './HeartIcon.svelte';
+	import { DateInput } from 'date-picker-svelte';
+	import { indexDay } from './stores';
 
 	const height = 20;
 	$: showSaved = $page.route.id == '/saved';
@@ -15,6 +17,11 @@
 			goto('/saved');
 		}
 	};
+
+	const handleDatePicker = () => {
+		$indexDay = day;
+	};
+	let day: Date;
 </script>
 
 <Navbar
@@ -24,7 +31,14 @@
 >
 	<NavBrand href="/" />
 	<NavHamburger on:click={toggle} />
-	<div>
+	<div class="flex gap-2 items-center">
+		<DateInput
+			closeOnSelection
+			bind:value={day}
+			on:select={handleDatePicker}
+			format="dd/MM"
+			placeholder="Välj datum"
+		/>
 		<Dropdown />
 	</div>
 	<div class="flex justify-between gap-2">

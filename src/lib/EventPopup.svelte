@@ -18,7 +18,6 @@
 	start = new Date(start).toISOString().substring(11, 16);
 	end = new Date(end).toISOString().substring(11, 16);
 	const location = event.location;
-	console.log(name);
 </script>
 
 <Modal title={`${name}: ${summary}`} bind:open={visible} on:hide={() => (visible = toggle())}>

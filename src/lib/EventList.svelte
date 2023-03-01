@@ -4,6 +4,7 @@
 	import { selectedOrganizers } from './stores';
 
 	export let list: Event[];
+
 	let filteredList = list;
 	$: {
 		filteredList = list.filter(
