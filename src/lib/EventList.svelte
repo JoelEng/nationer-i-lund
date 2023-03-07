@@ -1,9 +1,10 @@
 <script lang="ts">
 	import EventCard from './EventCard.svelte';
 	import type { Event } from './types';
-	import { selectedOrganizers } from './stores';
+	import { selectedOrganizers, selectedTime } from './stores';
 
 	export let list: Event[];
+
 
 	let filteredList = list;
 	$: {
@@ -12,7 +13,23 @@
 		);
 		if ($selectedOrganizers.size > 0) {
 			filteredList = list.filter((event) => $selectedOrganizers.has(event.organizer.name));
-		}
+		};
+		if ($selectedTime.size > 0) {
+			$selectedTime.forEach((time) => {
+				switch(time) {
+					case 'Lunch':
+						filteredList = list.filter((event) => new Date(event.date.start).getHours() < 13)
+						break;
+					case 'Eftermiddag':
+						filteredList = list.filter((event) => (new Date(event.date.start).getHours() < 18) && (new Date(event.date.start).getHours() > 13))
+						break;
+					case 'Kväll':
+						filteredList = list.filter((event) => new Date(event.date.start).getHours() > 17)
+						break;
+					default:
+				}
+			});
+		};
 	}
 </script>
 

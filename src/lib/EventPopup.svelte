@@ -15,7 +15,7 @@
 
 	const { name, email } = event.organizer;
 	let { start, end, last_updated } = event.date;
-	start = new Date(start).toISOString().substring(11, 16);
+	start = new Date(start).toISOString().substring(11, 16);	//detta blir UTC inte CET
 	end = new Date(end).toISOString().substring(11, 16);
 	const location = event.location;
 

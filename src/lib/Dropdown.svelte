@@ -1,7 +1,8 @@
 <script lang="ts">
 	import { Button, Dropdown, DropdownItem, Chevron, Checkbox } from 'flowbite-svelte';
-	import {selectedOrganizers} from './stores';
+	import {selectedOrganizers, selectedTime} from './stores';
 
+	const times = ['Lunch', 'Eftermiddag', 'Kväll']
 	const orgs = ['Lunds Nation', 'Göteborgs Nation', 'Malmö Nation', 'Kalmar Nation', 'Helsingkrona Nation', 'Sydskånska Nationen', 'Wermlands Nation', 'Västgöta Nation', 'Östgöta Nation', 'Blekingska Nationen', 'Hallands Nation'];
 
 	const handletoggle = (e:Event) => {
@@ -13,8 +14,23 @@
 		}
 	}
 
+	const handleTimeToggle = (e:Event) => {
+		if((e.target as HTMLInputElement).checked){
+			$selectedTime = new Set([...$selectedTime, (e.target as HTMLInputElement).value])
+		} else {
+			$selectedTime = new Set([...$selectedTime].filter((x) => x !== (e.target as HTMLInputElement).value))
+		}
+	}
+
 	function isInList (org:string) {
 		if($selectedOrganizers.has(org)){
+			return true;
+		}
+		else return false;
+	}
+
+	function isInTimeList (time:string) {
+		if($selectedTime.has(time)){
 			return true;
 		}
 		else return false;
@@ -32,13 +48,9 @@
 
 <Button color="light"><Chevron>Tid</Chevron></Button>
 <Dropdown class="w-44 p-3 space-y-3 text-sm">
-	<li>
-		<Checkbox>Lunch</Checkbox>
-	</li>
-	<li>
-		<Checkbox>Eftermiddag</Checkbox>
-	</li>
-	<li>
-		<Checkbox>Kväll</Checkbox>
-	</li>
+	{#each times as time}
+		<li>
+			<Checkbox value={time} checked={isInTimeList(time)} on:change={handleTimeToggle}>{time}</Checkbox>
+		</li>
+	{/each}
 </Dropdown>
