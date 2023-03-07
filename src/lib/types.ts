@@ -15,3 +15,11 @@ export interface Event {
 	summary: string;
 	url: string;
 }
+
+export interface BookedEvent {
+	event: Event;
+	f_name: string;
+	l_name: string;
+	email: string;
+	tel: string;
+}

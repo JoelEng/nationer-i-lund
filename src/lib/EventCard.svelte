@@ -3,6 +3,7 @@
 	import EventPopup from './EventPopup.svelte';
 	import type { Event } from './types';
 	import Heart from './Heart.svelte';
+	import {booked} from './stores';
 
 	enum Time {
 		Past,
@@ -56,4 +57,4 @@
 	</Card>
 </button>
 
-<EventPopup {event} visible={modalVisible} toggle={() => (modalVisible = !modalVisible)} />
+<EventPopup {event}  visible={modalVisible} toggle={() => (modalVisible = !modalVisible)} />
