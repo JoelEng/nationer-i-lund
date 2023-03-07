@@ -1,6 +1,5 @@
 <script lang="ts">
 	import { onMount } from 'svelte';
-	import EventCard from './EventCard.svelte';
 	import EventList from './EventList.svelte';
 	import { getDay } from './fetch';
 	import type { Event } from './types';
@@ -15,7 +14,7 @@
 		loading = false;
 	});
 
-	const weekDays = ['Mån', 'Tis', 'Ons', 'Tors', 'Fre', 'Lör', 'Sön'];
+	const weekDays = [ 'Sön', 'Mån', 'Tis', 'Ons', 'Tors', 'Fre', 'Lör'];
 
 	const dayString = () => {
 		let day = new Date();
