@@ -21,7 +21,6 @@
 			$selectedTime = new Set([...$selectedTime].filter((x) => x !== (e.target as HTMLInputElement).value))
 		}
 	}
-
 </script>
 
 <Button color="light"><Chevron>Nationer</Chevron></Button>

@@ -3,7 +3,6 @@
 	import EventPopup from './EventPopup.svelte';
 	import type { Event } from './types';
 	import Heart from './Heart.svelte';
-	import {booked} from './stores';
 
 	enum Time {
 		Past,
@@ -12,9 +11,33 @@
 	}
 
 	export let event: Event;
-	const start = new Date(event.date.start);
-	const end = new Date(event.date.end);
-	const now = new Date();
+	
+	let description = event.description;
+	let id = event.id;
+	let location = event.location;
+	let {name, email} = event.organizer;
+	let summary = event.summary;
+	let url = event.url;
+	let start = event.date.start;
+	let end = event.date.end;
+	let startDate = new Date(event.date.start);
+	let endDate = new Date(event.date.end);
+	let now = new Date();
+	$:{
+		description = event.description;
+		id = event.id;
+		location = event.location;
+		name = event.organizer.name;
+		email = event.organizer.email;
+		summary = event.summary;
+		url = event.url;
+		start = event.date.start;
+		end = event.date.end;
+		startDate = new Date(event.date.start);
+		endDate = new Date(event.date.end);
+		now = new Date();
+	}
+
 
 	const getTime = (date: Date) => {
 		return `${date.getHours().toString().padStart(2, '0')}:${date
@@ -24,25 +47,29 @@
 	};
 
 	let time: Time;
-	if (end < now) {
+	if (endDate < now) {
 		time = Time.Past;
-	} else if (start < now) {
+	} else if (startDate < now) {
 		time = Time.Present;
 	} else {
 		time = Time.Future;
 	}
 
 	let modalVisible = false;
+	const tmp = () => {
+		modalVisible = !modalVisible;
+	}
+	
 </script>
 
-<button on:click={() => (modalVisible = !modalVisible)}>
+<button on:click={tmp}>
 	<Card
 		class="hover:scale-105 relative transition-transform text-left h-full border-0 {time ==
 			Time.Past && 'opacity-20'}"
 		img={event.image_url}
 	>
 		<div class="flex justify-between m-0">
-			<p class="font-light">{getTime(start)} - {getTime(end)}</p>
+			<p class="font-light">{getTime(startDate)} - {getTime(endDate)}</p>
 			<Heart {event} />
 		</div>
 		<p class="text-lg font-bold m-0">{event.summary}</p>
@@ -57,4 +84,4 @@
 	</Card>
 </button>
 
-<EventPopup {event}  visible={modalVisible} toggle={() => (modalVisible = !modalVisible)} />
+<EventPopup {description} {summary} {name} {email} {start} {end} {location} {url} {id}  visible={modalVisible} toggle={() => (modalVisible = !modalVisible)} />

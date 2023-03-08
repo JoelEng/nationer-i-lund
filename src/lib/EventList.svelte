@@ -30,6 +30,7 @@
 				}
 			});
 		};
+		filteredList = filteredList
 	}
 </script>
 
