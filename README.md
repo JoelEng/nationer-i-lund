@@ -4,8 +4,6 @@ EDAF90 Project - The Svelte Manifesto
 
 Developers in every nation, take to arms, kill your react suppressor
 
-![Gullig](/images/gullig.png?raw=true 'Kul')
-
 ![Svelte](/images/svelte.png?raw=true 'Svelte')
 
 ## Developing
