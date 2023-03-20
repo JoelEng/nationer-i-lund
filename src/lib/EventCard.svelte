@@ -84,4 +84,4 @@
 	</Card>
 </button>
 
-<EventPopup {description} {summary} {name} {email} {start} {end} {location} {url} {id}  visible={modalVisible} toggle={() => (modalVisible = !modalVisible)} />
+<EventPopup {description} {summary} {name} {email} {startDate} {endDate} {location} {url} {id}  visible={modalVisible} toggle={() => (modalVisible = !modalVisible)} />

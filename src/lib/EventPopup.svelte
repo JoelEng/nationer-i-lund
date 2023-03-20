@@ -12,22 +12,24 @@
 	export let summary: string;
 	export let name: string;
 	export let email: string;
-	export let start: string;
-	export let end: string;
+	export let startDate: Date;
+	export let endDate: Date;
 	export let location: string;
 	export let url:string;
 	export let id:string;
 
-	let event = {date:{start: start, end: end, last_updated:''}, organizer:{name: name, email: email}, location: location, description: description, summary: summary, url: url, id: id, image_url:''};
-
+	
 	// const description = event['description'];
 	// const summary = event['summary'];
 	// const { name, email } = event.organizer;
 	// let { start, end, last_updated } = event.date;
 	// const location = event.location;
-
-	start = new Date(start).toISOString().substring(11, 16);	//detta blir UTC inte CET
-	end = new Date(end).toISOString().substring(11, 16);
+	
+	let startTime = `${startDate.getHours().toString().padStart(2, '0')}:${startDate.getMinutes().toString().padStart(2, '0')}`;//start.toISOString().substring(11, 16);	//detta blir UTC inte CET
+	let endTime = `${endDate.getHours().toString().padStart(2, '0')}:${endDate.getMinutes().toString().padStart(2, '0')}`;
+	
+	let event = {date:{start: startTime, end: endTime, last_updated:''}, organizer:{name: name, email: email}, location: location, description: description, summary: summary, url: url, id: id, image_url:''};
+	//return `${date.getHours().toString().padStart(2, '0')}:${date.getMinutes().toString().padStart(2, '0')}`;
 
 </script>
 
@@ -38,7 +40,7 @@
 		</p>
 
 		<p>
-			{start} - {end}
+			{startTime} - {endTime}
 		</p>
 		<p>
 			<!--  https://www.google.com/maps/search/?api=1&parameters 
