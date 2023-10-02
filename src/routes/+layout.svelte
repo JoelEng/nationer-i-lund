@@ -17,7 +17,7 @@
 	}
 
 	:global(body) {
-		height: 100vh;
-		height: -webkit-fill-available;
+		min-height: 100vh;
+		min-height: -webkit-fill-available;
 	}
 </style>
