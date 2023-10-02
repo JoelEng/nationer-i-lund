@@ -14,12 +14,30 @@
 	export let timeString: string;
 	export let visible: boolean;
 	export let toggle: () => void;
+
+	let modal: HTMLElement;
+	$: modalType = window.innerWidth > 600 ? 'modal' : 'sheet';
+
+	const drag = (e: TouchEvent) => {};
 </script>
 
 {#if visible}
 	<!-- svelte-ignore a11y-no-static-element-interactions -->
-	<div class="background" on:click={toggle} on:keydown={toggle}>
-		<div class="modal" on:click|stopPropagation on:keydown|stopPropagation>
+	<div
+		class={`background ${modalType == 'sheet' && 'sheetBackground'}`}
+		on:click={toggle}
+		on:keydown={toggle}
+	>
+		{#if modalType == 'sheet'}
+			<div class="filler" />
+		{/if}
+		<div
+			class={modalType}
+			on:click|stopPropagation
+			on:keydown|stopPropagation
+			on:touchmove={drag}
+			bind:this={modal}
+		>
 			<p class="organizer">{event.organizer.name}</p>
 			<p class="title">{event.summary}</p>
 			<p class="time">{timeString}</p>
@@ -66,8 +84,20 @@
 		background: rgba(100, 100, 100, 0.2);
 		backdrop-filter: blur(2px);
 		display: flex;
+		flex-direction: column;
 		align-items: center;
 		justify-content: center;
+		overflow: scroll;
+	}
+
+	.filler {
+		height: 100%;
+	}
+
+	.sheetBackground {
+		justify-content: flex-start;
+		padding-top: 200px;
+		overflow-y: scroll;
 	}
 
 	.modal {
@@ -80,6 +110,20 @@
 		max-height: 80vh;
 		display: flex;
 		flex-direction: column;
+	}
+
+	.sheet {
+		min-height: 200px;
+		width: 100%;
+		/* max-height: 100%; */
+		background: white;
+		border-top-left-radius: 30px;
+		border-top-right-radius: 30px;
+		padding: 20px;
+		padding-bottom: 60px;
+		display: flex;
+		flex-direction: column;
+		flex-shrink: 0;
 	}
 
 	.title {
@@ -111,8 +155,8 @@
 	.contents {
 		display: flex;
 		flex-direction: column;
-		overflow-y: scroll;
-		overflow-x: hidden;
+		/* overflow-y: scroll; */
+		/* overflow-x: hidden; */
 		gap: 12px;
 		padding-top: 20px;
 	}
