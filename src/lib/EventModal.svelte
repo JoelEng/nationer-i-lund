@@ -1,5 +1,6 @@
 <script lang="ts">
 	import Location from './icons/Location.svelte';
+	import Mail from './icons/Mail.svelte';
 	import type { Event } from './types';
 
 	enum Time {
@@ -25,17 +26,19 @@
 			<div class="divider" />
 			<div class="contents">
 				<div class="buttonContainer">
-					<a
-						class="button"
-						style:background="rgb(139, 255, 224)"
-						target="_blank"
-						href={`https://www.google.com/maps/search/?api=1&query=${event.location}`}
-					>
-						<Location /> hitta hit
-					</a>
+					{#if event.location}
+						<a
+							class="button"
+							style:background="rgb(139, 255, 224)"
+							target="_blank"
+							href={`https://www.google.com/maps/search/?api=1&query=${event.location}`}
+						>
+							<Location /> hitta hit
+						</a>
+					{/if}
 					{#if event.organizer.email}
 						<a class="button" target="_blank" href={`mailto:${event.organizer.email}`}>
-							maila nationen
+							<Mail /> maila nationen
 						</a>
 					{/if}
 				</div>
