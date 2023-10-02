@@ -108,7 +108,8 @@
 	.contents {
 		display: flex;
 		flex-direction: column;
-		overflow: scroll;
+		overflow-y: scroll;
+		overflow-x: hidden;
 		gap: 12px;
 		padding-top: 20px;
 	}
