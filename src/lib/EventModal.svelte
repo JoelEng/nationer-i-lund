@@ -120,7 +120,7 @@
 		border-top-left-radius: 30px;
 		border-top-right-radius: 30px;
 		padding: 20px;
-		padding-bottom: 60px;
+		padding-bottom: 100px;
 		display: flex;
 		flex-direction: column;
 		flex-shrink: 0;
