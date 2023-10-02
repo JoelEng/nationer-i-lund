@@ -10,3 +10,14 @@
 		<slot />
 	</div>
 </div>
+
+<style>
+	:global(html) {
+		height: -webkit-fill-available;
+	}
+
+	:global(body) {
+		height: 100vh;
+		height: -webkit-fill-available;
+	}
+</style>

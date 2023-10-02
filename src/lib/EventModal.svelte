@@ -79,8 +79,7 @@
 		top: 0;
 		left: 0;
 		width: 100vw;
-		height: 100vh;
-		height: -webkit-fill-available;
+		height: 100%;
 		z-index: 100;
 		background: rgba(100, 100, 100, 0.2);
 		backdrop-filter: blur(2px);
