@@ -1,5 +1,5 @@
 <script lang="ts">
-	import HeartIcon from './HeartIcon.svelte';
+	import HeartIcon from './icons/HeartIcon.svelte';
 	import { liked } from './stores';
 	import type { Event as NationEvent } from './types';
 

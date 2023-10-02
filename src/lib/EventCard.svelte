@@ -1,8 +1,6 @@
 <script lang="ts">
-	import { Card } from 'flowbite-svelte';
-	import EventPopup from './EventPopup.svelte';
 	import type { Event } from './types';
-	import Heart from './Heart.svelte';
+	import EventModal from './EventModal.svelte';
 
 	enum Time {
 		Past,
@@ -11,11 +9,11 @@
 	}
 
 	export let event: Event;
-	
+
 	let description = event.description;
 	let id = event.id;
 	let location = event.location;
-	let {name, email} = event.organizer;
+	let { name, email } = event.organizer;
 	let summary = event.summary;
 	let url = event.url;
 	let start = event.date.start;
@@ -23,7 +21,7 @@
 	let startDate = new Date(event.date.start);
 	let endDate = new Date(event.date.end);
 	let now = new Date();
-	$:{
+	$: {
 		description = event.description;
 		id = event.id;
 		location = event.location;
@@ -38,13 +36,13 @@
 		now = new Date();
 	}
 
-
 	const getTime = (date: Date) => {
 		return `${date.getHours().toString().padStart(2, '0')}:${date
 			.getMinutes()
 			.toString()
 			.padStart(2, '0')}`;
 	};
+	const timeString = `${getTime(startDate)} - ${getTime(endDate)}`;
 
 	let time: Time;
 	if (endDate < now) {
@@ -58,30 +56,61 @@
 	let modalVisible = false;
 	const tmp = () => {
 		modalVisible = !modalVisible;
-	}
-	
+	};
 </script>
 
-<button on:click={tmp}>
-	<Card
-		class="hover:scale-105 relative transition-transform text-left h-full border-0 {time ==
-			Time.Past && 'opacity-20'}"
-		img={event.image_url}
-	>
-		<div class="flex justify-between m-0">
-			<p class="font-light">{getTime(startDate)} - {getTime(endDate)}</p>
-			<Heart {event} />
-		</div>
-		<p class="text-lg font-bold m-0">{event.summary}</p>
-		<p class="italic font-light">{event.organizer.name}</p>
-		{#if time == Time.Present}
-			<div
-				class="absolute -top-2 -right-2 text-white bg-red-600 py-1 px-4 rounded-lg border-white border-2"
-			>
-				Just nu
+<div class="container hover:scale-105 {time == Time.Past && 'opacity-20'}">
+	<button on:click={tmp}>
+		<div class="card">
+			<img src={event.image_url} alt="" />
+			<div class="card-content">
+				<div class="flex justify-between m-0">
+					<p class="font-light">{timeString}</p>
+					<!-- <Heart {event} /> -->
+				</div>
+				<p class="text-lg font-bold m-0">{event.summary}</p>
+				<p class="italic font-light">{event.organizer.name}</p>
 			</div>
-		{/if}
-	</Card>
-</button>
+		</div>
+	</button>
+	{#if time == Time.Present}
+		<div
+			class="absolute -top-2 -right-2 text-white bg-red-500 py-1 px-4 rounded-lg border-white border-2 font-extrabold"
+		>
+			Just nu
+		</div>
+	{/if}
+</div>
 
-<EventPopup {description} {summary} {name} {email} {startDate} {endDate} {location} {url} {id}  visible={modalVisible} toggle={() => (modalVisible = !modalVisible)} />
+<EventModal
+	{event}
+	{time}
+	{timeString}
+	visible={modalVisible}
+	toggle={() => (modalVisible = !modalVisible)}
+/>
+
+<style>
+	.card {
+		position: relative;
+		text-align: left;
+		border-radius: 16px;
+		background: white;
+		overflow: hidden;
+	}
+
+	.card > img {
+		height: calc(8rem + 4vw);
+		width: 100%;
+		object-fit: cover;
+	}
+
+	.card-content {
+		padding: calc(10px + 0.5vw);
+	}
+
+	.container {
+		position: relative;
+		transition: transform 105ms;
+	}
+</style>

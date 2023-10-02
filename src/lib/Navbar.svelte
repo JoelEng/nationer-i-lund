@@ -1,9 +1,9 @@
 <script lang="ts">
 	import { goto } from '$app/navigation';
 	import { page } from '$app/stores';
-	import { Navbar, NavBrand, NavLi, NavUl, NavHamburger, DarkMode, Button } from 'flowbite-svelte';
+	import { Navbar, NavBrand, NavHamburger, DarkMode, Button } from 'flowbite-svelte';
 	import Dropdown from './Dropdown.svelte';
-	import HeartIcon from './HeartIcon.svelte';
+	import HeartIcon from './icons/HeartIcon.svelte';
 	import { DateInput } from 'date-picker-svelte';
 	import { indexDay } from './stores';
 
