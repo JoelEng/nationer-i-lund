@@ -5,8 +5,6 @@
 
 	export let list: Event[];
 
-	const colNum = window.innerWidth > 600 ? 3 : 2;
-
 	let filteredList = list;
 	$: {
 		filteredList = list.filter(
@@ -39,8 +37,23 @@
 	}
 </script>
 
-<div class="grid gap-4 grid-cols-{colNum} auto-cols-auto">
+<div class="container">
 	{#each filteredList as event}
 		<EventCard {event} />
 	{/each}
 </div>
+
+<style>
+	.container {
+		max-width: 1200px;
+		display: grid;
+		gap: 1rem;
+		grid-template-columns: repeat(2, 1fr);
+	}
+
+	@media (min-width: 700px) {
+		.container {
+			grid-template-columns: repeat(3, 1fr);
+		}
+	}
+</style>

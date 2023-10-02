@@ -70,6 +70,7 @@
 	.modal {
 		position: relative;
 		width: 90%;
+		max-width: 800px;
 		background: white;
 		border-radius: 20px;
 		padding: 20px;
