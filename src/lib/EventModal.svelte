@@ -138,6 +138,7 @@
 	.sheetContainer {
 		justify-content: flex-start;
 		padding-top: 400px;
+		height: calc(100lvh + 400px); /* match with sheet padding-bottom */
 	}
 
 	.modal {
@@ -161,7 +162,7 @@
 		border-top-right-radius: 30px;
 		padding: 20px;
 		padding-top: 14px;
-		padding-bottom: 100px;
+		padding-bottom: calc(60px + 400px); /* match with sheetcontainer height */
 		display: flex;
 		flex-direction: column;
 		flex-shrink: 0;
