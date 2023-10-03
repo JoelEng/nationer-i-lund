@@ -42,9 +42,7 @@
 
 	const touchmove = () => {
 		scrollTop = window.scrollY || window.document.documentElement.scrollTop;
-		window.onscroll = function () {
-			window.scrollTo(0, scrollTop);
-		};
+		window.scrollTo(0, scrollTop);
 	};
 
 	const touchend = (e: TouchEvent) => {
