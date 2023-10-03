@@ -20,30 +20,30 @@
 	let container: HTMLElement;
 	$: modalType = window.innerWidth > 600 ? 'modal' : 'sheet';
 
-	// let scrollTop: any = null;
+	let scrollTop: any = null;
 
-	// function disableScroll() {
-	// 	scrollTop = window.scrollY || window.document.documentElement.scrollTop;
-	// 	window.onscroll = function () {
-	// 		window.scrollTo(0, scrollTop);
-	// 	};
-	// }
+	function disableScroll() {
+		scrollTop = window.scrollY || window.document.documentElement.scrollTop;
+		window.onscroll = function () {
+			window.scrollTo(0, scrollTop);
+		};
+	}
 
-	// $: if (visible) {
-	// 	disableScroll();
-	// } else {
-	// 	window.onscroll = function () {};
-	// }
+	$: if (visible) {
+		disableScroll();
+	} else {
+		window.onscroll = function () {};
+	}
 
 	let touchstartY = 0;
 	const touchstart = (e: TouchEvent) => {
 		touchstartY = e.touches[0].clientY;
 	};
 
-	// const touchmove = () => {
-	// 	scrollTop = window.scrollY || window.document.documentElement.scrollTop;
-	// 	window.scrollTo(0, scrollTop);
-	// };
+	const touchmove = () => {
+		scrollTop = window.scrollY || window.document.documentElement.scrollTop;
+		window.scrollTo(0, scrollTop);
+	};
 
 	const touchend = (e: TouchEvent) => {
 		const touchY = e.changedTouches[0].clientY;
