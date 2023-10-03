@@ -130,7 +130,7 @@
 		justify-content: center;
 		overflow: scroll;
 		overscroll-behavior: contain;
-		animation: fadeIn 0.5s;
+		/* animation: fadeIn 0.5s; */
 	}
 
 	@keyframes fadeIn {
