@@ -1,4 +1,5 @@
 <script lang="ts">
+	import { fly } from 'svelte/transition';
 	import Location from './icons/Location.svelte';
 	import Mail from './icons/Mail.svelte';
 	import type { Event } from './types';
@@ -38,7 +39,7 @@
 {#if visible}
 	<!-- svelte-ignore a11y-no-static-element-interactions -->
 	<div
-		class={`container ${modalType == 'sheet' && 'sheetBackground'}`}
+		class={`container ${modalType == 'sheet' && 'sheetContainer'}`}
 		on:click={toggle}
 		on:keydown={toggle}
 		bind:this={container}
@@ -49,6 +50,7 @@
 		<div
 			class={modalType}
 			bind:this={modal}
+			transition:fly={{ x: 0, y: 500, opacity: 1 }}
 			on:click|stopPropagation
 			on:keydown|stopPropagation
 			on:touchstart={touchstart}
@@ -110,7 +112,7 @@
 		height: 100%;
 	}
 
-	.sheetBackground {
+	.sheetContainer {
 		justify-content: flex-start;
 		padding-top: 400px;
 		overflow-y: scroll;
