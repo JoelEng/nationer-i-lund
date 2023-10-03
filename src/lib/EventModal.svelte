@@ -130,7 +130,11 @@
 		justify-content: center;
 		overflow: scroll;
 		overscroll-behavior: contain;
-		/* animation: fadeIn 0.5s; */
+		animation: fadeIn 0.5s;
+		perspective: 1000;
+		-webkit-perspective: 1000;
+		backface-visibility: hidden;
+		-webkit-backface-visibility: hidden;
 	}
 
 	@keyframes fadeIn {
