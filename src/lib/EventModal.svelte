@@ -105,7 +105,7 @@
 			</div>
 			{#if time == Time.Present}
 				<div
-					class="absolute -top-2 -right-2 text-white bg-red-500 py-1 px-4 rounded-lg border-white border-2 font-extrabold"
+					class="absolute -top-2 right-4 text-white bg-red-400 py-1 px-4 rounded-lg border-white border-2 font-extrabold"
 				>
 					Just nu
 				</div>
@@ -129,6 +129,7 @@
 		align-items: center;
 		justify-content: center;
 		overflow: scroll;
+		overflow-x: hidden;
 		overscroll-behavior: contain;
 		animation: fadeIn 0.5s;
 		perspective: 1000;
@@ -170,6 +171,7 @@
 	}
 
 	.sheet {
+		position: relative;
 		min-height: 200px;
 		width: 100%;
 		/* max-height: 100%; */
