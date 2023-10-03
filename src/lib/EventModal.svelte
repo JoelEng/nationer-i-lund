@@ -17,7 +17,6 @@
 	export let visible: boolean;
 	export let toggle: () => void;
 
-	let modal: HTMLElement;
 	let container: HTMLElement;
 	$: modalType = window.innerWidth > 600 ? 'modal' : 'sheet';
 
@@ -30,14 +29,10 @@
 		};
 	}
 
-	function enableScroll() {
-		window.onscroll = function () {};
-	}
-
 	$: if (visible) {
 		disableScroll();
 	} else {
-		enableScroll();
+		window.onscroll = function () {};
 	}
 
 	let touchstartY = 0;
@@ -45,10 +40,17 @@
 		touchstartY = e.touches[0].clientY;
 	};
 
+	const touchmove = () => {
+		scrollTop = window.scrollY || window.document.documentElement.scrollTop;
+		window.onscroll = function () {
+			window.scrollTo(0, scrollTop);
+		};
+	};
+
 	const touchend = (e: TouchEvent) => {
 		const touchY = e.changedTouches[0].clientY;
 		const touchDiff = touchY - touchstartY;
-		if (touchDiff > 0 && container.scrollTop <= 0) {
+		if (touchDiff > 100 && container.scrollTop <= 0) {
 			toggle();
 			e.preventDefault();
 		}
@@ -68,11 +70,11 @@
 		{/if}
 		<div
 			class={modalType}
-			bind:this={modal}
 			transition:fly={{ x: 0, y: 500, opacity: 1 }}
 			on:click|stopPropagation
 			on:keydown|stopPropagation
 			on:touchstart={touchstart}
+			on:touchmove={touchmove}
 			on:touchend={touchend}
 		>
 			<p class="organizer">{event.organizer.name}</p>
