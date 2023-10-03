@@ -125,6 +125,7 @@
 		align-items: center;
 		justify-content: center;
 		overflow: scroll;
+		overscroll-behavior: contain;
 	}
 
 	.filler {
