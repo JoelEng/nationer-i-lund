@@ -16,27 +16,43 @@
 	export let toggle: () => void;
 
 	let modal: HTMLElement;
+	let container: HTMLElement;
 	$: modalType = window.innerWidth > 600 ? 'modal' : 'sheet';
 
-	const drag = (e: TouchEvent) => {};
+	let touchstartY = 0;
+	const touchstart = (e: TouchEvent) => {
+		touchstartY = e.touches[0].clientY;
+	};
+
+	const touchend = (e: TouchEvent) => {
+		const touchY = e.changedTouches[0].clientY;
+		const touchDiff = touchY - touchstartY;
+		console.log(container.scrollTop);
+		if (touchDiff > 0 && container.scrollTop <= 0) {
+			toggle();
+			e.preventDefault();
+		}
+	};
 </script>
 
 {#if visible}
 	<!-- svelte-ignore a11y-no-static-element-interactions -->
 	<div
-		class={`background ${modalType == 'sheet' && 'sheetBackground'}`}
+		class={`container ${modalType == 'sheet' && 'sheetBackground'}`}
 		on:click={toggle}
 		on:keydown={toggle}
+		bind:this={container}
 	>
 		{#if modalType == 'sheet'}
 			<div class="filler" />
 		{/if}
 		<div
 			class={modalType}
+			bind:this={modal}
 			on:click|stopPropagation
 			on:keydown|stopPropagation
-			on:touchmove={drag}
-			bind:this={modal}
+			on:touchstart={touchstart}
+			on:touchend={touchend}
 		>
 			<p class="organizer">{event.organizer.name}</p>
 			<p class="title">{event.summary}</p>
@@ -74,7 +90,7 @@
 {/if}
 
 <style>
-	.background {
+	.container {
 		position: fixed;
 		top: 0;
 		left: 0;
@@ -96,7 +112,7 @@
 
 	.sheetBackground {
 		justify-content: flex-start;
-		padding-top: 200px;
+		padding-top: 400px;
 		overflow-y: scroll;
 	}
 
