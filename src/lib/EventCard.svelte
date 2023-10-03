@@ -59,7 +59,7 @@
 	};
 </script>
 
-<div class="container hover:scale-105 {time == Time.Past && 'opacity-20'}">
+<div class="container {time == Time.Past && 'opacity-20'}">
 	<button on:click={tmp}>
 		<div class="card">
 			<img src={event.image_url} alt="" />

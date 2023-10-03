@@ -10,3 +10,9 @@
 		<slot />
 	</div>
 </div>
+
+<style>
+	:global(*) {
+		-webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+	}
+</style>
