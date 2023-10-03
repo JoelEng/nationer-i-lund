@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { fly } from 'svelte/transition';
+	import { fade, fly } from 'svelte/transition';
 	import Location from './icons/Location.svelte';
 	import Mail from './icons/Mail.svelte';
 	import type { Event } from './types';
@@ -62,6 +62,7 @@
 		on:click={toggle}
 		on:keydown={toggle}
 		bind:this={container}
+		out:fade={{ duration: 500 }}
 	>
 		{#if modalType == 'sheet'}
 			<div class="filler" />
@@ -122,13 +123,24 @@
 		height: 100lvh;
 		z-index: 100;
 		background: rgba(100, 100, 100, 0.2);
-		backdrop-filter: blur(2px);
+		backdrop-filter: blur(4px);
 		display: flex;
 		flex-direction: column;
 		align-items: center;
 		justify-content: center;
 		overflow: scroll;
 		overscroll-behavior: contain;
+		animation: fadeIn 0.5s;
+	}
+
+	@keyframes fadeIn {
+		0% {
+			backdrop-filter: blur(0px);
+			background: none;
+		}
+		/* 100% {
+			backdrop-filter: blur(4px);
+		} */
 	}
 
 	.filler {
