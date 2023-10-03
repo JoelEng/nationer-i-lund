@@ -75,6 +75,9 @@
 			on:touchmove={touchmove}
 			on:touchend={touchend}
 		>
+			{#if modalType == 'sheet'}
+				<div class="handlebar" />
+			{/if}
 			<p class="organizer">{event.organizer.name}</p>
 			<p class="title">{event.summary}</p>
 			<p class="time">{timeString}</p>
@@ -157,10 +160,20 @@
 		border-top-left-radius: 30px;
 		border-top-right-radius: 30px;
 		padding: 20px;
+		padding-top: 14px;
 		padding-bottom: 100px;
 		display: flex;
 		flex-direction: column;
 		flex-shrink: 0;
+	}
+
+	.handlebar {
+		height: 5px;
+		background: rgba(100, 100, 100, 0.1);
+		width: 50px;
+		align-self: center;
+		border-radius: 1000px;
+		margin-bottom: 10px;
 	}
 
 	.title {
