@@ -3,6 +3,7 @@
 	import Location from './icons/Location.svelte';
 	import Mail from './icons/Mail.svelte';
 	import type { Event } from './types';
+	import { browser } from '$app/environment';
 
 	enum Time {
 		Past,
@@ -20,6 +21,25 @@
 	let container: HTMLElement;
 	$: modalType = window.innerWidth > 600 ? 'modal' : 'sheet';
 
+	let scrollTop: any = null;
+
+	function disableScroll() {
+		scrollTop = window.scrollY || window.document.documentElement.scrollTop;
+		window.onscroll = function () {
+			window.scrollTo(0, scrollTop);
+		};
+	}
+
+	function enableScroll() {
+		window.onscroll = function () {};
+	}
+
+	$: if (visible) {
+		disableScroll();
+	} else {
+		enableScroll();
+	}
+
 	let touchstartY = 0;
 	const touchstart = (e: TouchEvent) => {
 		touchstartY = e.touches[0].clientY;
@@ -28,7 +48,6 @@
 	const touchend = (e: TouchEvent) => {
 		const touchY = e.changedTouches[0].clientY;
 		const touchDiff = touchY - touchstartY;
-		console.log(container.scrollTop);
 		if (touchDiff > 0 && container.scrollTop <= 0) {
 			toggle();
 			e.preventDefault();
@@ -115,7 +134,6 @@
 	.sheetContainer {
 		justify-content: flex-start;
 		padding-top: 400px;
-		overflow-y: scroll;
 	}
 
 	.modal {
@@ -173,8 +191,6 @@
 	.contents {
 		display: flex;
 		flex-direction: column;
-		/* overflow-y: scroll; */
-		/* overflow-x: hidden; */
 		gap: 12px;
 		padding-top: 20px;
 	}
