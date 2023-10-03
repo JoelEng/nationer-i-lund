@@ -9,28 +9,14 @@
 	}
 
 	export let event: Event;
+	const regex = new RegExp(`(\\||-) ${event.organizer.name}`, 'ig');
+	event.summary = event.summary.replace(regex, '');
+	console.log(event.summary);
 
-	let description = event.description;
-	let id = event.id;
-	let location = event.location;
-	let { name, email } = event.organizer;
-	let summary = event.summary;
-	let url = event.url;
-	let start = event.date.start;
-	let end = event.date.end;
 	let startDate = new Date(event.date.start);
 	let endDate = new Date(event.date.end);
 	let now = new Date();
 	$: {
-		description = event.description;
-		id = event.id;
-		location = event.location;
-		name = event.organizer.name;
-		email = event.organizer.email;
-		summary = event.summary;
-		url = event.url;
-		start = event.date.start;
-		end = event.date.end;
 		startDate = new Date(event.date.start);
 		endDate = new Date(event.date.end);
 		now = new Date();
