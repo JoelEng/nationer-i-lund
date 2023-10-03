@@ -162,7 +162,7 @@
 		border-top-right-radius: 30px;
 		padding: 20px;
 		padding-top: 14px;
-		padding-bottom: calc(60px + 400px); /* match with sheetcontainer height */
+		padding-bottom: calc(100px + 400px); /* match with sheetcontainer height */
 		display: flex;
 		flex-direction: column;
 		flex-shrink: 0;
