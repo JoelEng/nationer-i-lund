@@ -7,7 +7,7 @@
 	const incNum = 5;
 
 	let count = incNum;
-	let loading: boolean;
+	export let loading: boolean;
 
 	const inc = () => {
 		if (!loading) {

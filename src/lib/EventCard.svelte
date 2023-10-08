@@ -11,7 +11,6 @@
 	export let event: Event;
 	const regex = new RegExp(`(\\||-) ${event.organizer.name}`, 'ig');
 	event.summary = event.summary.replace(regex, '');
-	console.log(event.summary);
 
 	let startDate = new Date(event.date.start);
 	let endDate = new Date(event.date.end);
@@ -92,11 +91,10 @@
 	}
 
 	.card-content {
-		padding: calc(10px + 0.5vw);
+		padding: calc(10px + 0.7vw);
 	}
 
 	.container {
 		position: relative;
-		transition: transform 105ms;
 	}
 </style>
