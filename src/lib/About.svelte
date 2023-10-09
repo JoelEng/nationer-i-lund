@@ -13,4 +13,6 @@
 <Modal {visible} {toggle}>
 	Skapad med kärlek och hårda droger
 	<div />
+	<a href="https://github.com/JoelEng/nationer-i-lund" target="_blank">repo</a>
 </Modal>
+
