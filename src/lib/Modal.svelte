@@ -127,6 +127,19 @@
 		flex-direction: column;
 	}
 
+	@media (min-width: 700px) {
+		.container {
+			width: 100vw;
+			height: 100lvh;
+		}
+		.modal {
+			max-height: 80%;
+			max-width: 50%;
+			overflow: scroll;
+			overflow-x: hidden;
+		}
+	}
+
 	.sheet {
 		position: relative;
 		min-height: 200px;

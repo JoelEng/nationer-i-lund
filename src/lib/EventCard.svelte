@@ -19,6 +19,7 @@
 		startDate = new Date(event.date.start);
 		endDate = new Date(event.date.end);
 		now = new Date();
+		console.log(`update ${event.organizer.name}, ${event.date.start}`)
 	}
 
 	const getTime = (date: Date) => {
@@ -27,7 +28,10 @@
 			.toString()
 			.padStart(2, '0')}`;
 	};
-	const timeString = `${getTime(startDate)} - ${getTime(endDate)}`;
+	let timeString : string = " ";
+	$: {
+		timeString = `${getTime(startDate)} - ${getTime(endDate)}`;
+	}
 
 	let time: Time;
 	if (endDate < now) {
