@@ -19,7 +19,7 @@
 		startDate = new Date(event.date.start);
 		endDate = new Date(event.date.end);
 		now = new Date();
-		console.log(`update ${event.organizer.name}, ${event.date.start}`)
+		console.log(`update ${event.organizer.name}, ${event.date.start}`);
 	}
 
 	const getTime = (date: Date) => {
@@ -28,7 +28,7 @@
 			.toString()
 			.padStart(2, '0')}`;
 	};
-	let timeString : string = " ";
+	let timeString: string = ' ';
 	$: {
 		timeString = `${getTime(startDate)} - ${getTime(endDate)}`;
 	}
@@ -52,7 +52,7 @@
 	<button on:click={tmp}>
 		<div class="card">
 			<img src={event.image_url} alt="" />
-			<div class="card-content">
+			<div class="cardContent">
 				<div class="flex justify-between m-0">
 					<p class="font-light">{timeString}</p>
 					<!-- <Heart {event} /> -->
@@ -94,11 +94,13 @@
 		object-fit: cover;
 	}
 
-	.card-content {
+	.cardContent {
 		padding: calc(10px + 0.7vw);
 	}
 
 	.cardContainer {
 		position: relative;
+		display: flex;
+		flex-direction: column;
 	}
 </style>

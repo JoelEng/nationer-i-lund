@@ -15,6 +15,8 @@
 	export let timeString: string;
 	export let visible: boolean;
 	export let toggle: () => void;
+
+	$: modalType = window.innerWidth > 600 ? 'modal' : 'sheet';
 </script>
 
 <Modal {visible} {toggle}>
@@ -23,7 +25,9 @@
 	<p class="time">{timeString}</p>
 	<div class="divider" />
 	<div class="contents">
-		<img src={event.image_url} alt="event" />
+		{#if modalType == 'sheet'}
+			<img src={event.image_url} alt="event" />
+		{/if}
 		<div class="buttonContainer">
 			{#if event.location}
 				<a
