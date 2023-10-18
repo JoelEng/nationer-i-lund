@@ -48,7 +48,7 @@
 	};
 </script>
 
-<div class="container {time == Time.Past && 'opacity-20'}">
+<div class="cardContainer {time == Time.Past && 'opacity-20'}">
 	<button on:click={tmp}>
 		<div class="card">
 			<img src={event.image_url} alt="" />
@@ -98,7 +98,7 @@
 		padding: calc(10px + 0.7vw);
 	}
 
-	.container {
+	.cardContainer {
 		position: relative;
 	}
 </style>

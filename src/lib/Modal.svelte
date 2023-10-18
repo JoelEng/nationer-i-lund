@@ -45,7 +45,7 @@
 {#if visible}
 	<!-- svelte-ignore a11y-no-static-element-interactions -->
 	<div
-		class={`container ${modalType == 'sheet' && 'sheetContainer'}`}
+		class={`modalContainer ${modalType == 'sheet' && 'sheetContainer'}`}
 		on:click={toggle}
 		on:keydown={toggle}
 		bind:this={container}
@@ -72,7 +72,7 @@
 {/if}
 
 <style>
-	.container {
+	.modalContainer {
 		position: fixed;
 		top: 0;
 		left: 0;
@@ -154,6 +154,7 @@
 		display: flex;
 		flex-direction: column;
 		flex-shrink: 0;
+		box-shadow: 0 0 20px rgba(0, 0, 0, 0.3);
 	}
 
 	.handlebar {

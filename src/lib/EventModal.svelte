@@ -55,86 +55,6 @@
 </Modal>
 
 <style>
-	.container {
-		position: fixed;
-		top: 0;
-		left: 0;
-		width: 100vw;
-		height: 100lvh;
-		z-index: 100;
-		background: rgba(100, 100, 100, 0.2);
-		backdrop-filter: blur(4px);
-		display: flex;
-		flex-direction: column;
-		align-items: center;
-		justify-content: center;
-		overflow: scroll;
-		overflow-x: hidden;
-		overscroll-behavior: contain;
-		animation: fadeIn 0.5s;
-		perspective: 1000;
-		-webkit-perspective: 1000;
-		backface-visibility: hidden;
-		-webkit-backface-visibility: hidden;
-	}
-
-	@keyframes fadeIn {
-		0% {
-			backdrop-filter: blur(0px);
-			background: none;
-		}
-		/* 100% {
-			backdrop-filter: blur(4px);
-		} */
-	}
-
-	.filler {
-		height: 100%;
-	}
-
-	.sheetContainer {
-		justify-content: flex-start;
-		padding-top: 400px;
-		height: calc(100lvh + 400px); /* match with sheet padding-bottom */
-	}
-
-	.modal {
-		position: relative;
-		width: 90%;
-		max-width: 800px;
-		background: white;
-		border-radius: 20px;
-		padding: 40px;
-		max-height: 80vh;
-		display: flex;
-		flex-direction: column;
-	}
-
-	.sheet {
-		position: relative;
-		min-height: 200px;
-		width: 100%;
-		/* max-height: 100%; */
-		background: white;
-		border-top-left-radius: 30px;
-		border-top-right-radius: 30px;
-		padding: 20px;
-		padding-top: 14px;
-		padding-bottom: calc(100px + 400px); /* match with sheetcontainer height */
-		display: flex;
-		flex-direction: column;
-		flex-shrink: 0;
-	}
-
-	.handlebar {
-		height: 5px;
-		background: rgba(100, 100, 100, 0.1);
-		width: 50px;
-		align-self: center;
-		border-radius: 1000px;
-		margin-bottom: 10px;
-	}
-
 	.title {
 		font-size: 1.4rem;
 		font-weight: bolder;
@@ -188,5 +108,6 @@
 	img {
 		border-radius: 20px;
 		align-self: center;
+		box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.2);
 	}
 </style>
