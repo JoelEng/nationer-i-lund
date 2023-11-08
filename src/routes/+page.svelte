@@ -9,7 +9,7 @@
 <div class="topbar">
 	{#if !loading}
 		<Filter />
-		<About />
+		<!-- <About /> -->
 	{/if}
 </div>
 <DaysList bind:loading />
