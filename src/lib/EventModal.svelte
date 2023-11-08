@@ -1,9 +1,8 @@
 <script lang="ts">
-	import { fade, fly } from 'svelte/transition';
 	import Location from './icons/Location.svelte';
 	import Mail from './icons/Mail.svelte';
 	import type { Event } from './types';
-	import { browser } from '$app/environment';
+	import Modal from './Modal.svelte';
 
 	enum Time {
 		Past,
@@ -17,184 +16,49 @@
 	export let visible: boolean;
 	export let toggle: () => void;
 
-	let container: HTMLElement;
 	$: modalType = window.innerWidth > 600 ? 'modal' : 'sheet';
-
-	let scrollTop: any = null;
-
-	function disableScroll() {
-		scrollTop = window.scrollY || window.document.documentElement.scrollTop;
-		window.onscroll = function () {
-			window.scrollTo(0, scrollTop);
-		};
-	}
-
-	$: if (visible) {
-		disableScroll();
-	} else {
-		window.onscroll = function () {};
-	}
-
-	let touchstartY = 0;
-	const touchstart = (e: TouchEvent) => {
-		touchstartY = e.touches[0].clientY;
-	};
-
-	const touchmove = () => {
-		scrollTop = window.scrollY || window.document.documentElement.scrollTop;
-		window.scrollTo(0, scrollTop);
-	};
-
-	const touchend = (e: TouchEvent) => {
-		const touchY = e.changedTouches[0].clientY;
-		const touchDiff = touchY - touchstartY;
-		if (touchDiff > 100 && container.scrollTop <= 0) {
-			toggle();
-			e.preventDefault();
-		}
-	};
 </script>
 
-{#if visible}
-	<!-- svelte-ignore a11y-no-static-element-interactions -->
-	<div
-		class={`container ${modalType == 'sheet' && 'sheetContainer'}`}
-		on:click={toggle}
-		on:keydown={toggle}
-		bind:this={container}
-		out:fade={{ duration: 500 }}
-	>
+<Modal {visible} {toggle}>
+	<p class="organizer">{event.organizer.name}</p>
+	<p class="title">{event.summary}</p>
+	<p class="time">{timeString}</p>
+	<div class="divider" />
+	<div class="contents">
 		{#if modalType == 'sheet'}
-			<div class="filler" />
+			<img src={event.image_url} alt="event" />
 		{/if}
-		<div
-			class={modalType}
-			transition:fly={{ x: 0, y: 500, opacity: 1 }}
-			on:click|stopPropagation
-			on:keydown|stopPropagation
-			on:touchstart={touchstart}
-			on:touchmove={touchmove}
-			on:touchend={touchend}
-		>
-			{#if modalType == 'sheet'}
-				<div class="handlebar" />
-			{/if}
-			<p class="organizer">{event.organizer.name}</p>
-			<p class="title">{event.summary}</p>
-			<p class="time">{timeString}</p>
-			<div class="divider" />
-			<div class="contents">
-				<div class="buttonContainer">
-					{#if event.location}
-						<a
-							class="button"
-							style:background="rgb(139, 255, 224)"
-							target="_blank"
-							href={`https://www.google.com/maps/search/?api=1&query=${event.location}`}
-						>
-							<Location /> hitta hit
-						</a>
-					{/if}
-					{#if event.organizer.email}
-						<a class="button" target="_blank" href={`mailto:${event.organizer.email}`}>
-							<Mail /> maila nationen
-						</a>
-					{/if}
-				</div>
-				<p class="description">{event.description}</p>
-			</div>
-			{#if time == Time.Present}
-				<div
-					class="absolute -top-2 right-4 text-white bg-red-400 py-1 px-4 rounded-lg border-white border-2 font-extrabold"
+		<div class="buttonContainer">
+			{#if event.location}
+				<a
+					class="button"
+					style:background="rgb(139, 255, 224)"
+					target="_blank"
+					href={`https://www.google.com/maps/search/?api=1&query=${event.location}`}
 				>
-					Just nu
-				</div>
+					<Location /> hitta hit
+				</a>
+			{/if}
+			{#if event.organizer.email}
+				<a class="button" target="_blank" href={`mailto:${event.organizer.email}`}>
+					<Mail /> maila nationen
+				</a>
 			{/if}
 		</div>
+		<p class="description">
+			{event.description}
+		</p>
 	</div>
-{/if}
+	{#if time == Time.Present}
+		<div
+			class="absolute -top-2 right-4 text-white bg-red-400 py-1 px-4 rounded-lg border-white border-2 font-extrabold"
+		>
+			Just nu
+		</div>
+	{/if}
+</Modal>
 
 <style>
-	.container {
-		position: fixed;
-		top: 0;
-		left: 0;
-		width: 100vw;
-		height: 100lvh;
-		z-index: 100;
-		background: rgba(100, 100, 100, 0.2);
-		backdrop-filter: blur(4px);
-		display: flex;
-		flex-direction: column;
-		align-items: center;
-		justify-content: center;
-		overflow: scroll;
-		overflow-x: hidden;
-		overscroll-behavior: contain;
-		animation: fadeIn 0.5s;
-		perspective: 1000;
-		-webkit-perspective: 1000;
-		backface-visibility: hidden;
-		-webkit-backface-visibility: hidden;
-	}
-
-	@keyframes fadeIn {
-		0% {
-			backdrop-filter: blur(0px);
-			background: none;
-		}
-		/* 100% {
-			backdrop-filter: blur(4px);
-		} */
-	}
-
-	.filler {
-		height: 100%;
-	}
-
-	.sheetContainer {
-		justify-content: flex-start;
-		padding-top: 400px;
-		height: calc(100lvh + 400px); /* match with sheet padding-bottom */
-	}
-
-	.modal {
-		position: relative;
-		width: 90%;
-		max-width: 800px;
-		background: white;
-		border-radius: 20px;
-		padding: 20px;
-		max-height: 80vh;
-		display: flex;
-		flex-direction: column;
-	}
-
-	.sheet {
-		position: relative;
-		min-height: 200px;
-		width: 100%;
-		/* max-height: 100%; */
-		background: white;
-		border-top-left-radius: 30px;
-		border-top-right-radius: 30px;
-		padding: 20px;
-		padding-top: 14px;
-		padding-bottom: calc(100px + 400px); /* match with sheetcontainer height */
-		display: flex;
-		flex-direction: column;
-		flex-shrink: 0;
-	}
-
-	.handlebar {
-		height: 5px;
-		background: rgba(100, 100, 100, 0.1);
-		width: 50px;
-		align-self: center;
-		border-radius: 1000px;
-		margin-bottom: 10px;
-	}
-
 	.title {
 		font-size: 1.4rem;
 		font-weight: bolder;
@@ -243,5 +107,11 @@
 	.buttonContainer {
 		display: flex;
 		gap: 8px;
+	}
+
+	img {
+		border-radius: 20px;
+		align-self: center;
+		box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.2);
 	}
 </style>
