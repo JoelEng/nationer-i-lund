@@ -37,14 +37,14 @@
 	}
 </script>
 
-<div class="container">
+<div class="listContainer">
 	{#each filteredList as event}
 		<EventCard {event} />
 	{/each}
 </div>
 
 <style>
-	.container {
+	.listContainer {
 		max-width: 1200px;
 		display: grid;
 		gap: 1rem;
@@ -52,7 +52,7 @@
 	}
 
 	@media (min-width: 700px) {
-		.container {
+		.listContainer {
 			grid-template-columns: repeat(3, 1fr);
 		}
 	}

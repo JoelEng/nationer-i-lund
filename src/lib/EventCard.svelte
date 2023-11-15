@@ -11,7 +11,6 @@
 	export let event: Event;
 	const regex = new RegExp(`(\\||-) ${event.organizer.name}`, 'ig');
 	event.summary = event.summary.replace(regex, '');
-	console.log(event.summary);
 
 	let startDate = new Date(event.date.start);
 	let endDate = new Date(event.date.end);
@@ -20,6 +19,7 @@
 		startDate = new Date(event.date.start);
 		endDate = new Date(event.date.end);
 		now = new Date();
+		console.log(`update ${event.organizer.name}, ${event.date.start}`);
 	}
 
 	const getTime = (date: Date) => {
@@ -28,7 +28,10 @@
 			.toString()
 			.padStart(2, '0')}`;
 	};
-	const timeString = `${getTime(startDate)} - ${getTime(endDate)}`;
+	let timeString: string = ' ';
+	$: {
+		timeString = `${getTime(startDate)} - ${getTime(endDate)}`;
+	}
 
 	let time: Time;
 	if (endDate < now) {
@@ -45,11 +48,11 @@
 	};
 </script>
 
-<div class="container {time == Time.Past && 'opacity-20'}">
+<div class="cardContainer {time == Time.Past && 'opacity-20'}">
 	<button on:click={tmp}>
 		<div class="card">
 			<img src={event.image_url} alt="" />
-			<div class="card-content">
+			<div class="cardContent">
 				<div class="flex justify-between m-0">
 					<p class="font-light">{timeString}</p>
 					<!-- <Heart {event} /> -->
@@ -91,12 +94,13 @@
 		object-fit: cover;
 	}
 
-	.card-content {
-		padding: calc(10px + 0.5vw);
+	.cardContent {
+		padding: calc(10px + 0.7vw);
 	}
 
-	.container {
+	.cardContainer {
 		position: relative;
-		transition: transform 105ms;
+		display: flex;
+		flex-direction: column;
 	}
 </style>

@@ -40,7 +40,7 @@
 <Dropdown class="w-44 p-3 space-y-3 text-sm">
 	{#each times as time}
 		<li>
-			<Radio value={time} checked={$selectedTime.has(time)} on:change={handleTimeToggle}>{time}</Radio>
+			<Checkbox value={time} checked={$selectedTime.has(time)} on:change={handleTimeToggle}>{time}</Checkbox>
 		</li>
 	{/each}
 	<Button on:click={restoreTimeFilter}>Clear</Button>
