@@ -1,5 +1,5 @@
 <script lang="ts">
-	import About from '$lib/About.svelte';
+	import RepoLink from '$lib/RepoLink.svelte';
 	import DaysList from '$lib/DaysList.svelte';
 	import Filter from '$lib/Filter.svelte';
 
@@ -9,7 +9,7 @@
 <div class="topbar">
 	{#if !loading}
 		<Filter />
-		<!-- <About /> -->
+		<RepoLink />
 	{/if}
 </div>
 <DaysList bind:loading />
