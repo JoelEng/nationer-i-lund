@@ -46,7 +46,11 @@
 				</a>
 			{/if}
 			{#if event.organizer.website}
-				<a class="button" target="_blank" href={`${event.organizer.website}`}>
+				<a
+				class="button"
+				style:background="rgb(255, 102, 178)"
+				target="_blank" 
+				href={`${event.organizer.website}`}>
 					<Link /> hemsida
 				</a>
 			{/if}
