@@ -1,6 +1,7 @@
 <script lang="ts">
 	import Location from './icons/Location.svelte';
 	import Mail from './icons/Mail.svelte';
+	import Link from './icons/Link.svelte'
 	import type { Event } from './types';
 	import Modal from './Modal.svelte';
 
@@ -42,6 +43,11 @@
 			{#if event.organizer.email}
 				<a class="button" target="_blank" href={`mailto:${event.organizer.email}`}>
 					<Mail /> maila nationen
+				</a>
+			{/if}
+			{#if event.organizer.website}
+				<a class="button" target="_blank" href={`${event.organizer.website}`}>
+					<Link /> hemsida
 				</a>
 			{/if}
 		</div>

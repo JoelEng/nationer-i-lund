@@ -11,6 +11,7 @@ export interface Event {
 	organizer: {
 		name: string;
 		email: string;
+		website: string;
 	};
 	summary: string;
 	url: string;
