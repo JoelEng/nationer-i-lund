@@ -1,32 +1,37 @@
 <script lang="ts">
 	import FilterIcon from './icons/FilterIcon.svelte';
 	import { Button, Dropdown, Chevron, Checkbox, Radio } from 'flowbite-svelte';
-	import { selectedOrganizers, selectedTimes } from './stores';
+	import { selectedOrganizers, selectedTimes, organizers } from './stores';
 	import Modal from './Modal.svelte';
 
 	let visible: boolean;
 	let toggle = () => (visible = !visible);
 
 	const times = ['Lunch', 'Eftermiddag', 'Kväll'];
-	const orgs = [
-		'P6',
-		'Akademiska Föreningen',
-		'Boelspexarna',
-		'Kuratorskollegiet',
-		'Amnesty Lund Student Group',
-		'Samhällsvetarkåren vid Lunds universitet',
-		'Lunds Nation',
-		'Göteborgs Nation',
-		'Malmö Nation',
-		'Kalmar Nation',
-		'Helsingkrona Nation',
-		'Sydskånska Nationen',
-		'Wermlands Nation',
-		'Västgöta Nation',
-		'Östgöta Nation',
-		'Blekingska Nationen',
-		'Hallands Nation'
-	];
+	let orgs: string[] = [];
+	$:{
+		orgs = [...$organizers];
+		console.log(orgs.length)
+	}
+	// const orgs = [
+	// 	'P6',
+	// 	'Akademiska Föreningen',
+	// 	'Boelspexarna',
+	// 	'Kuratorskollegiet',
+	// 	'Amnesty Lund Student Group',
+	// 	'Samhällsvetarkåren vid Lunds universitet',
+	// 	'Lunds Nation',
+	// 	'Göteborgs Nation',
+	// 	'Malmö Nation',
+	// 	'Kalmar Nation',
+	// 	'Helsingkrona Nation',
+	// 	'Sydskånska Nationen',
+	// 	'Wermlands Nation',
+	// 	'Västgöta Nation',
+	// 	'Östgöta Nation',
+	// 	'Blekingska Nationen',
+	// 	'Hallands Nation'
+	// ]; //17 stycken
 
 	const handletoggle = (e: Event) => {
 		//If the checkbox is checked, add it to the store

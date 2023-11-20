@@ -1,9 +1,14 @@
 <script lang="ts">
 	import EventCard from './EventCard.svelte';
 	import type { Event } from './types';
-	import { selectedOrganizers, selectedTimes } from './stores';
+	import { selectedOrganizers, selectedTimes, organizers } from './stores';
 
 	export let list: Event[];
+
+	//putting organizer names in $organizers to only present relevant organizers.
+	let new_orgs = list.map((x) => x.organizer.name);
+	new_orgs = new_orgs.filter((x) => x !== "" && x.length > 1);
+	$organizers = new Set([...$organizers, ...new_orgs]);
 
 	let filteredList = list;
 	$: {
