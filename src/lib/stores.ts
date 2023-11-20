@@ -29,6 +29,6 @@ if(browser) {
 }
 
 
-export const selectedTime: Writable<Set<string>> = writable(new Set())
+export const selectedTimes: Writable<Set<string>> = writable(new Set())
 export const selectedOrganizers: Writable<Set<string>> = writable(new Set());
 export const indexDay: Writable<Date> = writable(new Date());

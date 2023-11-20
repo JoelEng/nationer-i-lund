@@ -1,7 +1,7 @@
 <script lang="ts">
 	import FilterIcon from './icons/FilterIcon.svelte';
 	import { Button, Dropdown, Chevron, Checkbox, Radio } from 'flowbite-svelte';
-	import { selectedOrganizers, selectedTime } from './stores';
+	import { selectedOrganizers, selectedTimes } from './stores';
 	import Modal from './Modal.svelte';
 
 	let visible: boolean;
@@ -41,16 +41,16 @@
 
 	const handleTimeToggle = (e: Event) => {
 		if ((e.target as HTMLInputElement).checked) {
-			$selectedTime = new Set([(e.target as HTMLInputElement).value]);
+			$selectedTimes = new Set([... $selectedTimes, (e.target as HTMLInputElement).value]);
 		} else {
-			$selectedTime = new Set(
-				[...$selectedTime].filter((x) => x !== (e.target as HTMLInputElement).value)
+			$selectedTimes = new Set(
+				[...$selectedTimes].filter((x) => x !== (e.target as HTMLInputElement).value)
 			);
 		}
 	};
 
 	const restoreTimeFilter = () => {
-		$selectedTime = new Set();
+		$selectedTimes = new Set();
 	};
 </script>
 
@@ -65,9 +65,9 @@
 		<ul>
 			{#each times as time}
 				<li>
-					<Checkbox value={time} checked={$selectedTime.has(time)} on:change={handleTimeToggle}
-						>{time}</Checkbox
-					>
+					<Checkbox value={time} checked={$selectedTimes.has(time)} on:change={handleTimeToggle}>
+						{time}
+					</Checkbox>
 				</li>
 			{/each}
 		</ul>

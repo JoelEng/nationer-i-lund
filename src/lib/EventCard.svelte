@@ -11,6 +11,8 @@
 	export let event: Event;
 	const regex = new RegExp(`(\\||-) ${event.organizer.name}`, 'ig');
 	event.summary = event.summary.replace(regex, '');
+	console.log(event);
+	console.log(event.organizer);
 
 	let startDate = new Date(event.date.start);
 	let endDate = new Date(event.date.end);
@@ -19,7 +21,7 @@
 		startDate = new Date(event.date.start);
 		endDate = new Date(event.date.end);
 		now = new Date();
-		console.log(`update ${event.organizer.name}, ${event.date.start}`);
+		//console.log(`update ${event.organizer.name}, ${event.date.start}`);
 	}
 
 	const getTime = (date: Date) => {
