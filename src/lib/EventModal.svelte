@@ -1,7 +1,7 @@
 <script lang="ts">
 	import Location from './icons/Location.svelte';
 	import Mail from './icons/Mail.svelte';
-	import Link from './icons/Link.svelte'
+	import Link from './icons/Link.svelte';
 	import type { Event } from './types';
 	import Modal from './Modal.svelte';
 
@@ -47,10 +47,11 @@
 			{/if}
 			{#if event.organizer.website}
 				<a
-				class="button"
-				style:background="rgb(255, 102, 178)"
-				target="_blank" 
-				href={`${event.organizer.website}`}>
+					class="button"
+					style:background="rgb(255, 140, 198)"
+					target="_blank"
+					href={`${event.organizer.website}`}
+				>
 					<Link /> hemsida
 				</a>
 			{/if}
