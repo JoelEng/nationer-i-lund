@@ -12,6 +12,45 @@
 	const regex = new RegExp(`(\\||-) ${event.organizer.name}`, 'ig');
 	event.summary = event.summary.replace(regex, '');
 
+	function getWebsite(org: string): string {
+		const organ = org;
+		switch (organ) {
+			case 'Västgöta Nation':
+				return 'https://www.vgnation.se/';
+				break;
+			case 'Kalmar Nation':
+				return 'https://www.kalmarnation.nu/';
+				break;
+			case 'Lunds Nation':
+				return 'https://lundsnation.com/en/the-nation/';
+				break;
+			case 'Göteborgs Nation':
+				return 'https://www.goteborgsnation.com/';
+				break;
+			case 'Sydskånska Nationen':
+				return 'https://sydskanska.se/en/';
+				break;
+			case 'Östgöta Nation':
+				return 'https://www.ostgota.nu/';
+				break;
+			case 'Wermlands Nation':
+				return 'https://www.wermlandsnation.se/';
+				break;
+			case 'Blekingska Nationen':
+				return 'https://www.blekingska.se/';
+				break;
+			case 'Helsingkrona Nation':
+				return 'https://helsingkrona.se/';
+				break;
+			case 'Hallands Nation':
+				return 'https://www.hallandsnation.se/';
+				break;
+		}
+		return '';
+	}
+
+	event.organizer.website = getWebsite(event.organizer.name);
+
 	let startDate = new Date(event.date.start);
 	let endDate = new Date(event.date.end);
 	let now = new Date();
@@ -19,7 +58,6 @@
 		startDate = new Date(event.date.start);
 		endDate = new Date(event.date.end);
 		now = new Date();
-		console.log(`update ${event.organizer.name}, ${event.date.start}`);
 	}
 
 	const getTime = (date: Date) => {

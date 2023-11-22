@@ -3,7 +3,7 @@ import type { Event, BookedEvent } from './types';
 import { browser } from '$app/environment';
 
 //Likes are the events that have been marked as liked by the user
-let storedLikes: Event[] = [];
+let storedLikes: Event[] = []; //Should be removed.
 
 if (browser) {
 	storedLikes = JSON.parse(localStorage.liked || '[]');
@@ -29,6 +29,8 @@ if(browser) {
 }
 
 
-export const selectedTime: Writable<Set<string>> = writable(new Set())
+export const selectedTimes: Writable<Set<string>> = writable(new Set())
 export const selectedOrganizers: Writable<Set<string>> = writable(new Set());
 export const indexDay: Writable<Date> = writable(new Date());
+
+export const organizers: Writable<Set<string>> = writable(new Set());
