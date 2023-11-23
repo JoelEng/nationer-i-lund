@@ -1,6 +1,6 @@
 <script lang="ts">
 	import FilterIcon from './icons/FilterIcon.svelte';
-	import { Button, Dropdown, Chevron, Checkbox, Radio } from 'flowbite-svelte';
+	import CheckboxButton from './CheckboxButton.svelte';
 	import { selectedOrganizers, selectedTimes, organizers } from './stores';
 	import Modal from './Modal.svelte';
 
@@ -9,29 +9,24 @@
 
 	const times = ['Lunch', 'Eftermiddag', 'Kväll'];
 	let orgs: string[] = [];
-	$:{
+	$: {
 		orgs = [...$organizers];
 	}
 
-
-	const handletoggle = (e: Event) => {
+	const handletoggle = (checked: boolean, value: string) => {
 		//If the checkbox is checked, add it to the store
-		if ((e.target as HTMLInputElement).checked) {
-			$selectedOrganizers = new Set([...$selectedOrganizers, (e.target as HTMLInputElement).value]);
+		if (checked) {
+			$selectedOrganizers = new Set([...$selectedOrganizers, value]);
 		} else {
-			$selectedOrganizers = new Set(
-				[...$selectedOrganizers].filter((x) => x !== (e.target as HTMLInputElement).value)
-			);
+			$selectedOrganizers = new Set([...$selectedOrganizers].filter((x) => x !== value));
 		}
 	};
 
-	const handleTimeToggle = (e: Event) => {
-		if ((e.target as HTMLInputElement).checked) {
-			$selectedTimes = new Set([... $selectedTimes, (e.target as HTMLInputElement).value]);
+	const handleTimeToggle = (checked: boolean, value: string) => {
+		if (checked) {
+			$selectedTimes = new Set([...$selectedTimes, value]);
 		} else {
-			$selectedTimes = new Set(
-				[...$selectedTimes].filter((x) => x !== (e.target as HTMLInputElement).value)
-			);
+			$selectedTimes = new Set([...$selectedTimes].filter((x) => x !== value));
 		}
 	};
 
@@ -45,29 +40,53 @@
 </button>
 
 <Modal {visible} {toggle}>
-	Filtrera
-	<div>Tid</div>
+	<p class="headingText">Filtrera</p>
 	<div>
-		<ul>
+		<p class="subheadingText">Tid</p>
+		<div class="buttonsList">
 			{#each times as time}
-				<li>
-					<Checkbox value={time} checked={$selectedTimes.has(time)} on:change={handleTimeToggle}>
-						{time}
-					</Checkbox>
-				</li>
+				<CheckboxButton
+					value={time}
+					checked={$selectedTimes.has(time)}
+					handleToggle={handleTimeToggle}
+				>
+					{time}
+				</CheckboxButton>
 			{/each}
-		</ul>
-	</div>
-	Nation
-	<div>
-		<ul>
+		</div>
+		<p class="subheadingText">Nation</p>
+		<div class="buttonsList">
 			{#each orgs as org}
-				<li>
-					<Checkbox value={org} checked={$selectedOrganizers.has(org)} on:change={handletoggle}
-						>{org}</Checkbox
-					>
-				</li>
+				<CheckboxButton
+					value={org}
+					checked={$selectedOrganizers.has(org)}
+					handleToggle={handletoggle}
+				>
+					{org}
+				</CheckboxButton>
 			{/each}
-		</ul>
+		</div>
 	</div>
 </Modal>
+
+<style>
+	.headingText {
+		font-weight: bold;
+		text-decoration: underline;
+		font-size: xx-large;
+		color: #111827;
+	}
+
+	.subheadingText {
+		margin-top: 12px;
+		margin-bottom: 6px;
+		font-weight: bold;
+		color: #111827;
+	}
+
+	.buttonsList {
+		display: flex;
+		flex-wrap: wrap;
+		gap: 10px;
+	}
+</style>
