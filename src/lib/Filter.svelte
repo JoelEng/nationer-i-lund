@@ -1,6 +1,6 @@
 <script lang="ts">
 	import FilterIcon from './icons/FilterIcon.svelte';
-	import { Button, Dropdown, Chevron, Checkbox, Radio } from 'flowbite-svelte';
+	import { Checkbox } from 'flowbite-svelte';
 	import { selectedOrganizers, selectedTimes, organizers } from './stores';
 	import Modal from './Modal.svelte';
 
@@ -45,27 +45,25 @@
 </button>
 
 <Modal {visible} {toggle}>
-	Filtrera
-	<div>Tid</div>
+	<p class="mb-4 font-semibold text-gray-900 dark:text-white">Filtrera</p>
 	<div>
-		<ul>
-			{#each times as time}
-				<li>
-					<Checkbox value={time} checked={$selectedTimes.has(time)} on:change={handleTimeToggle}>
-						{time}
-					</Checkbox>
-				</li>
+		<p class="mb-4 font-semibold text-gray-900 dark:text-white">Tid</p>
+		<ul class="w-48 bg-white rounded-lg border border-gray-200 dark:bg-gray-800 dark:border-gray-600 divide-y divide-gray-200 dark:divide-gray-600">
+  			{#each times as time}
+  				<li>
+	  				<Checkbox class="p-3" value={time} checked={$selectedTimes.has(time)} on:change={handleTimeToggle}>
+		  				{time}
+	  				</Checkbox>
+  				</li>
 			{/each}
 		</ul>
-	</div>
-	Nation
-	<div>
-		<ul>
+		<p class="mb-4 font-semibold text-gray-900 dark:text-white">Nation</p>
+		<ul class="w-48 bg-white rounded-lg border border-gray-200 dark:bg-gray-800 dark:border-gray-600 divide-y divide-gray-200 dark:divide-gray-600" >
 			{#each orgs as org}
 				<li>
-					<Checkbox value={org} checked={$selectedOrganizers.has(org)} on:change={handletoggle}
-						>{org}</Checkbox
-					>
+					<Checkbox class="p-3" value={org} checked={$selectedOrganizers.has(org)} on:change={handletoggle}>
+						{org}
+					</Checkbox>
 				</li>
 			{/each}
 		</ul>
