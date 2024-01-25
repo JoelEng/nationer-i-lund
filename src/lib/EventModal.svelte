@@ -113,10 +113,12 @@
 		display: flex;
 		align-items: center;
 		gap: 8px;
+		flex-shrink: 0;
 	}
 
 	.buttonContainer {
 		display: flex;
+		flex-wrap: wrap;
 		gap: 8px;
 	}
 
